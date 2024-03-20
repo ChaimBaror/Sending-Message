@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-tel-input {
+    @apply w-full;
+}
+
+.react-tel-input .special-label {
+    @apply hidden;
+}
+
+.react-tel-input .form-control {
+    @apply w-full rounded-lg border border-gray-200 py-2 pl-14 h-10 focus:outline-none focus:shadow-lg focus:shadow-emerald-100 focus:border-emerald-300 focus-visible:outline-none;
+}
+
+.react-tel-input .flag-dropdown {
+    @apply bg-white border border-gray-200 border-r-0 rounded-l-lg px-2;
+}
+
+.react-tel-input .flag-dropdown.open {
+    @apply rounded-l-lg bg-white;
+}
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+    @apply rounded-l-lg bg-white;
+}
+
+.react-tel-input .country-list {
+    @apply bg-white rounded-md shadow max-w-max px-1;
+}
+
+.react-tel-input .country-list .search {
+    @apply p-2;
+}
+.react-tel-input .country-list .search .search-box {
+    @apply w-full mx-auto rounded-lg py-2 focus:outline-none focus:shadow-sm focus:shadow-emerald-100 focus:border-emerald-300 focus-visible:outline-none;
+}
+
+.react-tel-input .country-list .country  {
+    @apply focus-within:outline-emerald-300;
+}
+.react-tel-input .country-list .country.highlight  {
+    @apply bg-emerald-100 focus-within:outline-emerald-300;
+}

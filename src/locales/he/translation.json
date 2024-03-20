@@ -1,0 +1,41 @@
+{
+    "document": {
+        "title": "שלח WhatsApp | MeiyerDev"
+    },
+    "app": {
+        "title": " <span class='text-emerald-500'>WhatsApp</span>",
+        "userslist": "רשימת משתמשים",
+        "greeting": "שלום",
+        "buttons": {
+            "send": "שלח",
+            "save": "שמור",
+            "cancel": "בטל",
+            "loading": "טוען"
+        },
+        "settings": {
+            "title": "הגדרות היישום",
+            "labels": {
+                "language": "שפה",
+                "preferredCountry": "מדינה מועדפת"
+            }
+        },
+        "footer": {
+            "madeWidth": "נוצר בעזרת",
+            "by": "על ידי"
+        },
+        "countries": {
+            "ar": "ארגנטינה",
+            "cl": "צ'ילה",
+            "co": "קולומביה",
+            "ec": "אקוודור",
+            "pe": "פרו",
+            "us": "ארצות הברית",
+            "ve": "ונצואלה"
+        },
+        "languages": {
+            "es": "ספרדית",
+            "he": "עברית",
+            "en": "אנגלית"
+        }
+    }
+}
