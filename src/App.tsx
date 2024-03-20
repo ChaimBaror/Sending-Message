@@ -15,17 +15,13 @@ const usersList = [
   { username: 'יואל', phone: '+972 50-312-1062' },
   { username: 'מנחם', phone: '+972 546684821' },
   { username: 'שמעון דורמנו', phone: '+972 585993447' },
-
-  // Add more users as needed
 ];
 
 const App = () => {
   const { t, i18n } = useTranslation();
-
   const { preferredCountry } = useSettings();
 
   const [direction, setDirection] = useState('rtl');
-
   const [whatsAppUrl, setWhatsAppUrl] = useGenerateWhatsappUrl();
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,65 +38,51 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (i18n.language === 'he') {
-      setDirection('rtl');
-    } else {
-      setDirection('ltr');
-    }
+    setDirection(i18n.language === 'he' ? 'rtl' : 'ltr');
+  }, [i18n]);
 
-  }, [i18n])
-
-
-  const handleMessageChange = (e) => {
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
-  const handleUsernameChange = (e) => {
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGreeting(e.target.value);
   };
 
   useEffect(() => {
     setGreeting(`${t('app.greeting')} ${selectedUser.username}!`);
-  }, [selectedUser])
+  }, [selectedUser]);
 
   useEffect(() => {
-    setToWhatsapp()
-  }, [message, greeting])
+    setToWhatsapp();
+  }, [message, greeting]);
 
   const setToWhatsapp = () => {
-    const fullMessage = `${greeting} ${message}`
-    // setIsLoading(true);
+    const fullMessage = `${greeting} ${message}`;
     const isValidPhone = isValidPhoneNumber(selectedUser.phone, preferredCountry);
     setIsPhoneValid(isValidPhone);
     setWhatsAppUrl(isValidPhone ? selectedUser.phone : '', fullMessage);
     setIsLoading(false);
-  }
-
-
-
+  };
 
   return (
     <div className='relative h-screen w-screen overflow-hidden bg-gray-100'>
       <SettingsModal open={isOpenModalSettings} close={() => setIsOpenModalSettings(false)} />
-
       <button
         className='fixed top-5 right-5 cursor-pointer rounded-xl p-4 focus-visible:outline focus-visible:outline-emerald-600'
         onClick={() => setIsOpenModalSettings(true)}
       >
         <Cog6ToothIcon className='h-5 w-5 text-emerald-500' />
       </button>
-      <div  className=" absolute z-10 container mx-auto p-4">
+      <div className="absolute z-10 container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">{t('app.userslist')}</h1>
         <UserList users={users} setSelectedUser={setSelectedUser} />
       </div>
-
       <div className='absolute top-0 left-0 aspect-1 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300 blur-lg' />
       <div className='absolute right-0 bottom-0 aspect-1 w-80 translate-x-2/3 translate-y-2/3 rounded-full bg-emerald-300 blur-lg' />
-
       <div className='relative mx-auto h-full max-w-xs'>
         <div className='flex h-full flex-col items-center justify-center gap-4' >
           <h1 className='text-3xl font-bold' dangerouslySetInnerHTML={{ __html: t('app.title') }}></h1>
-
           <PhoneField phoneUser={selectedUser.phone} preferredCountry={preferredCountry} onChange={handleChange} isValid={isPhoneValid} />
           <div dir={direction}>
             <h2 className='text-lg font-medium' >
@@ -117,10 +99,9 @@ const App = () => {
               onChange={handleMessageChange}
               placeholder="Type your message..."
               className="border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
-              rows="4"
+              rows={4}
             ></textarea>
           </div>
-
           <a
             aria-disabled={!isPhoneValid}
             href={whatsAppUrl}
@@ -148,7 +129,6 @@ const App = () => {
             <span>{isLoading ? t('app.buttons.loading') + '...' : t('app.buttons.send')}</span>
           </a>
         </div>
-
         <div className='absolute bottom-10 w-full'>
           <p className='w-full text-center text-xs font-semibold text-gray-500'>
             {t('app.footer.madeWidth')} <span className='text-red-500'>❤</span> {t('app.footer.by')}{' '}
