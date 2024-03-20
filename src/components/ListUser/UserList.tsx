@@ -1,9 +1,20 @@
 import React from 'react';
 
-const UserList = ({ users, setSelectedUser }) => {
-  const handleUserClick = (user) => {
+interface User {
+  username: string;
+  phone: string;
+}
+
+interface UserListProps {
+  users: User[];
+  setSelectedUser: (user: User) => void;
+}
+
+const UserList: React.FC<UserListProps> = ({ users, setSelectedUser }) => {
+  const handleUserClick = (user: User) => {
     setSelectedUser(user);
-  }
+  };
+
   return (
     <div className="flex flex-col space-y-4">
       {users.map((user, index) => (
