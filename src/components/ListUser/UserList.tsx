@@ -27,7 +27,6 @@ const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
   };
 
   const getData = async () => {
-
     const results = [
       { name: { first: 'חיים', last: ' בר-אור' }, phone: '+972 0527158077' },
       { name: { first: 'איתיאל', last: 'ראובן' }, phone: '+972 52-763-8404' },
@@ -57,12 +56,10 @@ const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
 
   const filteredUsers = filterData(searchTerm);
 
-  const handleSelectChange = (e : React.ChangeEvent<HTMLSelectElement>) => {
-    const user = filteredUsers.find(user => user.phone === e.target.value);
-    if (user)
-    setSelectedUser({ username: `${user.name.first} ${user.name.last}`, phone: user.phone });
-
-  }
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const user = filteredUsers.find((user) => user.phone === e.target.value);
+    if (user) setSelectedUser({ username: `${user.name.first} ${user.name.last}`, phone: user.phone });
+  };
 
   return (
     <div className='container w-80 overflow-hidden rounded-lg bg-white shadow-md '>
@@ -81,7 +78,7 @@ const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
         <ul id='result' className='user-list m-0 h-96 list-none overflow-y-auto bg-white p-0'>
           {filteredUsers.length > 0 ? (
             filteredUsers.map((user, index) => (
-              <li
+              <button
                 key={index}
                 onClick={() => handleUserClick(user)}
                 className='flex items-center border-b border-gray-300 py-5 px-4'
@@ -97,7 +94,7 @@ const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
                   </h4>
                   <p className='text-sm'>{user.phone}</p>
                 </div>
-              </li>
+              </button>
             ))
           ) : (
             <li className='py-5 px-4'>
@@ -106,20 +103,23 @@ const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
           )}
         </ul>
       </div>
-      <div className="relative mb-2 block flex items-center p-4 lg:hidden">
-      <select 
-        required
-        className="w-64 cursor-pointer appearance-none rounded-lg border border-gray-200 bg-white px-3 py-2 text-black/70 outline-blue-600/50 transition-all invalid:text-black/30 hover:border-blue-600/30"
-        onChange={(e) => handleSelectChange(e)}
-      >
-        <option value="" disabled>Select an option</option>
-        {filteredUsers.length > 0 && filteredUsers.map((user, index) => (
-          <option key={index} value={user.phone} className="cursor-pointer">
-            {user.name.first} {user.name.last}
+      <div className='relative mb-2 block flex items-center p-4 lg:hidden'>
+        <select
+          required
+          className='w-64 cursor-pointer appearance-none rounded-lg border border-gray-200 bg-white px-3 py-2 text-black/70 outline-blue-600/50 transition-all invalid:text-black/30 hover:border-blue-600/30'
+          onChange={(e) => handleSelectChange(e)}
+        >
+          <option value='' disabled>
+            Select an option
           </option>
-        ))}
-      </select>
-    </div>
+          {filteredUsers.length > 0 &&
+            filteredUsers.map((user, index) => (
+              <option key={index} value={user.phone} className='cursor-pointer'>
+                {user.name.first} {user.name.last}
+              </option>
+            ))}
+        </select>
+      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ type Props = {
   phoneUser?: string;
 };
 
-export const PhoneField = ({ onChange, isValid, preferredCountry, phoneUser = ''}: Props) => (
+export const PhoneField = ({ onChange, isValid, preferredCountry, phoneUser = '' }: Props) => (
   <PhoneInputComponent
     value={phoneUser}
     localization={es}

@@ -23,7 +23,7 @@ const App = () => {
   const [isOpenModalSettings, setIsOpenModalSettings] = useState(false);
   const [selectedUser, setSelectedUser] = useState({ username: '', phone: '' });
   const [message, setMessage] = useState('hi there!');
-  const [greeting, setGreeting] = useState(t('app.greeting'));
+  const [greeting, setGreeting] = useState(t('app.greeting') || 'hi');
   const [username, setUsername] = useState(selectedUser.username);
 
   const handleChange = (numberValue: string, country: CountryData) => {
@@ -63,7 +63,7 @@ const App = () => {
     <div className='relative h-screen w-screen overflow-hidden bg-gray-100'>
       <SettingsModal open={isOpenModalSettings} close={() => setIsOpenModalSettings(false)} />
       <button
-        className='z-50 fixed top-5 right-5 cursor-pointer rounded-xl p-4 focus-visible:outline focus-visible:outline-emerald-600'
+        className='fixed top-5 right-5 z-50 cursor-pointer rounded-xl p-4 focus-visible:outline focus-visible:outline-emerald-600'
         onClick={() => setIsOpenModalSettings(true)}
       >
         <Cog6ToothIcon className='h-5 w-5 text-emerald-500' />
@@ -75,7 +75,7 @@ const App = () => {
       <div className='absolute top-0 left-0 aspect-1 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300 blur-lg' />
       <div className='absolute right-0 bottom-0 aspect-1 w-80 translate-x-2/3 translate-y-2/3 rounded-full bg-emerald-300 blur-lg' />
       <div className='relative mx-auto h-full max-w-xs'>
-        <div className='text-center flex h-full flex-col items-center justify-center gap-4'>
+        <div className='flex h-full flex-col items-center justify-center gap-4 text-center'>
           <h1 className='text-3xl font-bold' dangerouslySetInnerHTML={{ __html: t('app.title') }}></h1>
           <PhoneField
             phoneUser={selectedUser.phone}
@@ -108,15 +108,13 @@ const App = () => {
               ></textarea>
             </h2>
           </div>
-          <a
+          <button
+            onClick={() => window.open(whatsAppUrl, '_blank', 'noopener,noreferrer')}
             aria-disabled={!isPhoneValid}
-            href={whatsAppUrl}
-            target='_blank'
-            rel='noopener noreferrer'
             className={`flex w-full items-center justify-center rounded-3xl bg-emerald-500 py-2 font-medium text-white focus-visible:outline focus-visible:outline-emerald-600 ${
               (!isPhoneValid || isLoading) && 'pointer-events-none opacity-60'
             }`}
-            onClick={() => setIsLoading(true)}
+            // onClick={() => setIsLoading(true)}
           >
             {isLoading && (
               <svg
@@ -134,7 +132,7 @@ const App = () => {
               </svg>
             )}
             <span>{isLoading ? t('app.buttons.loading') + '...' : t('app.buttons.send')}</span>
-          </a>
+          </button>
         </div>
         <div className='absolute bottom-10 w-full'>
           <p className='w-full text-center text-xs font-semibold text-gray-500'>

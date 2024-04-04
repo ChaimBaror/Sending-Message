@@ -6,7 +6,7 @@ import './index.css';
 import { SettingsProvider } from './context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <SettingsProvider >
+  <SettingsProvider>
     <App />
   </SettingsProvider>,
 );

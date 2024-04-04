@@ -8,8 +8,8 @@ export const useGenerateWhatsappUrl = (): UseGenerateWhatsappUrl => {
   const [whatsappUrl, setWhatsappUrl] = useState<string>('');
 
   const generateWhatsappUrl: GenerateWhatsappUrl = (phone: string, text?: string) => {
-    console.log("generateWhatsappUrl phone", phone, "text", text);
-    
+    console.log('generateWhatsappUrl phone', phone, 'text', text);
+
     const queryParams = new URLSearchParams([
       ['phone', phone],
       ['type', 'phone_number'],
