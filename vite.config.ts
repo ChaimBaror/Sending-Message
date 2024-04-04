@@ -5,7 +5,7 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/send-whatsapp/',
+  base: '/',
   plugins: [
     react(),
     splitVendorChunkPlugin(),
@@ -16,7 +16,7 @@ export default defineConfig({
       },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'vite.svg'],
       manifest: {
-        id: 'meiyerDev.github.io/send-whatsapp/',
+        id: 'send-whatsapp',
         name: 'Send a WhatsApp',
         short_name: 'SendWhatsApp',
         description: 'Send a WhatsApp without saving the contact.',
