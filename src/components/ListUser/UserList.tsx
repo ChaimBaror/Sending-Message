@@ -57,7 +57,7 @@ const UserList: React.FC<UserListProps> = ({ setSelectedUser }) => {
 
   const filteredUsers = filterData(searchTerm);
 
-  const handleSelectChange = (e) => {
+  const handleSelectChange = (e : React.ChangeEvent<HTMLSelectElement>) => {
     const user = filteredUsers.find(user => user.phone === e.target.value);
     if (user)
     setSelectedUser({ username: `${user.name.first} ${user.name.last}`, phone: user.phone });
